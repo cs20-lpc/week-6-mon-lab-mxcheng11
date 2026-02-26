@@ -7,7 +7,33 @@ using namespace std;
  * Function prototype
 *******************************************************************************/
 
-void towerHanoi(int, string, string, string, int&);
+/** 
+ * Algorithm analysis:
+ * 
+ */
+void towerHanoi(int numDisks, string source, string buffer , string target, int& numMoves)
+{
+    // TO DO
+
+    // base case 
+    if (numDisks == 1)
+    {
+        numMoves++;
+        cout << "Moving Disc " << numDisks << " from " << source << " to " << target << endl;
+        return;
+    }
+
+    // recursive case 
+    towerHanoi(numDisks - 1, source, target, buffer, numMoves); // move n-1 disks from source to buffer
+
+    // move biggest disk to target 
+    numMoves++;
+    cout << "Moving Disc " << numDisks << " from " << source << " to " << target << endl;
+
+    // move n-1 disks from buffer to target
+    towerHanoi(numDisks - 1, buffer, source, target, numMoves);
+
+}
 
 /*******************************************************************************
  * Description:
@@ -20,6 +46,7 @@ void towerHanoi(int, string, string, string, int&);
  * Output:
  * An integer to signal to the OS the exit code.
 *******************************************************************************/
+
 
 int main() {
     // solve the first 5 cases of the Tower of Hanoi problem

@@ -8,17 +8,69 @@ using namespace std;
 /*******************************************************************************
  * Function prototype
 *******************************************************************************/
-
+/**
+ * Algorithm analysis:
+ * O(n) time complexity, O(n) space complexity 
+ */
 template <typename T>
-T findMaxRecTail(const T[] arr, const int size, int = 0)
+T findMaxRecTail(const T arr[], const int size, int i = 0)
 {
+
     // TO DO: Implement your code
+   
+   //base case 
+   if (i == size - 1)
+    {
+         return arr[i];
+    }
+
+    //recursive case 
+    T maxTail = findMaxRecTail(arr, size, i + 1);
+
+    //compare 
+    if (arr[i] > maxTail)
+    {
+        return arr[i];
+    }
+    else
+    {
+        return maxTail;
+    }
+
 }
 
+/**
+ * Algorithm analysis:
+ * O(n) time complexity, O(log n) space complexity
+ * 
+ */
 template <typename T>
-T findMaxRecBinarySplit(const T[] arr, const int left, const int right)
-{
-    // TO DO: Implement your code
+T findMaxRecBinarySplit(const T arr[], const int left, const int right)
+{ // TO DO: Implement your code
+
+    // base case 
+    if (left == right)
+    {
+        return arr[left];
+    }
+
+    // recursive case 
+    int mid = left + (right - left) / 2; // find midpoint 
+
+    T maxLeft = findMaxRecBinarySplit(arr, left, mid); 
+    T maxRight = findMaxRecBinarySplit(arr, mid + 1, right);
+
+    // compare
+    if (maxLeft > maxRight)
+    {
+        return maxLeft;
+    }
+    else
+    {
+        return maxRight;    
+    }
+
+    
 }
 /*******************************************************************************
  * Description:
